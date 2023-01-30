@@ -32,7 +32,7 @@ export default function Login() {
           id: response.data.id,
           status: true,
         });
-        navigate("/");
+        navigate("/users");
       }
     });
     resetForm({ data: "" });
@@ -45,7 +45,10 @@ export default function Login() {
       onSubmit={onSubmit}
     >
       <Form>
-        <div className="login container w-50" style={{ marginTop: "180px" }}>
+        <div
+          className="login container w-50 mb-5"
+          style={{ marginTop: "180px" }}
+        >
           <div className="first-field">
             <Field
               placeholder="Enter your username"

@@ -6,6 +6,7 @@ import Users from "./Pages/Users";
 import CreatePost from "./Pages/CreatePost";
 import SeePost from "./Pages/SeePost";
 import ViewPost from "./Pages/ViewPost";
+import Footer from "./Component/Footer";
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -14,8 +15,8 @@ export const AppContext = createContext();
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
-    id:0,
-    status: false 
+    id: 0,
+    status: false,
   });
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function App() {
       })
       .then((response) => {
         if (response.data.error) {
-          setAuthState({...authState, status:false});
+          setAuthState({ ...authState, status: false });
         } else {
           setAuthState({
             username: response.data.username,
@@ -51,6 +52,7 @@ function App() {
             <Route path="/" element={<SeePost />} />
             <Route path="/click/:id" element={<ViewPost />} />
           </Routes>
+          <Footer />
         </Router>
       </AppContext.Provider>
     </div>

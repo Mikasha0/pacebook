@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../App";
+import "./Navbar.css";
 
 export default function Navbar() {
   let navigate = useNavigate();
@@ -13,13 +14,31 @@ export default function Navbar() {
 
     navigate("/login");
   };
+  useEffect(() => {
+    const navEl = document.querySelector(".navbar");
+    const navCol = document.querySelectorAll(".nav-link");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 65) {
+        navEl.classList.add("navbar-scrolled");
+        for (let i = 0; i < navCol.length; i++) {
+          navCol[i].classList.add("nav-color");
+        }
+      } else if (window.scrollY < 65) {
+        navEl.classList.remove("navbar-scrolled");
+        for (let i = 0; i < navCol.length; i++) {
+          navCol[i].classList.remove("nav-color");
+        }
+      }
+    });
+  });
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-light fixed-top">
-        <div className="container-fluid">
-          <Link to="/login" className="navbar-brand">
-            Navbar
+      <nav className="navbar navbar-expand-lg  fixed-top navbar-scrolled">
+        <div className="container-md p-2">
+          <Link to="/login" className="navbar-brand" style={{ color: "blue" }}>
+            pacebook
           </Link>
 
           <button

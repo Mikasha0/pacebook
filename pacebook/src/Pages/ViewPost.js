@@ -1,10 +1,10 @@
-import { useState, useEffect,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "../App";
-
+import "../Component/Navbar.css";
 
 export default function ViewPost() {
   const { id } = useParams();
@@ -16,6 +16,8 @@ export default function ViewPost() {
   const [show, setShow] = useState(false);
 
   const { authState } = useContext(AppContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:4000/posts/click/${id}`).then((response) => {
@@ -65,16 +67,20 @@ export default function ViewPost() {
   };
 
   const deleteComment = (id) => {
-    axios.delete(`http://localhost:4000/comments/${id}`,{
-      headers:{
-        accessToken:localStorage.getItem("accessToken"),
-      }
-    }).then(() => {
-      setComment(comment.filter((val) => {
-        return val.id!==id;
-      }))
-    })
-  }
+    axios
+      .delete(`http://localhost:4000/comments/${id}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then(() => {
+        setComment(
+          comment.filter((val) => {
+            return val.id !== id;
+          })
+        );
+      });
+  };
 
   const showComment = () => {
     setShow(!show);
@@ -82,6 +88,23 @@ export default function ViewPost() {
     axios.get(`http://localhost:4000/comments/${id}`).then((response) => {
       setComment(response.data);
     });
+  };
+
+  const deletePost = (id) => {
+    axios
+      .delete(`http://localhost:4000/posts/${id}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        alert("deleted successfully");
+        navigate("/");
+      });
+  };
+
+  const back = () => {
+    navigate("/");
   };
 
   return (
@@ -121,32 +144,56 @@ export default function ViewPost() {
                 </div>
               </Form>
             </Formik>
-            <button className="btn btn-primary my-3" onClick={showComment}>
+            {authState.username === postObject.username && (
+              <button
+                className="btn btn-danger my-3"
+                onClick={() => {
+                  deletePost(postObject.id);
+                }}
+              >
+                Delete Post
+              </button>
+            )}
+
+            <button className="btn btn-primary my-3 mx-2" onClick={back}>
+              Go Back
+            </button>
+            <button className="btn btn-secondary my-3" onClick={showComment}>
               Load Comments
             </button>
           </div>
         </div>
       </div>
       <div className="container my-5">
-        {show && comment.map((value) => (
-          <div
-            className="container"
-            key={value.comment}
-            style={{ marginTop: "20px" }}
-          >
-            <div className="card">
-              <div className="card-body">
-                <h6 className="card-title" style={{ color: "green" }}>
-                  {value.username}
-                </h6>
-                <p className="card-text">{value.comment}</p>
-              </div>
-              <div className="card-footer text-muted">
-                  {authState.username === value.username && <button className="btn btn-danger" onClick={() =>{deleteComment(value.id)}}>Delete</button>}
+        {show &&
+          comment.map((value) => (
+            <div
+              className="container"
+              key={value.comment}
+              style={{ marginTop: "20px" }}
+            >
+              <div className="card">
+                <div className="card-body">
+                  <h6 className="card-title" style={{ color: "green" }}>
+                    {value.username}
+                  </h6>
+                  <p className="card-text">{value.comment}</p>
                 </div>
+                <div className="card-footer text-muted">
+                  {authState.username === value.username && (
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => {
+                        deleteComment(value.id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );

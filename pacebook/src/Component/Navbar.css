@@ -1,0 +1,16 @@
+.wallpaper .logo{
+    width: clamp(70px, 100vw, 120px);
+    height: auto;
+}
+.navbar-scrolled{
+    background-color: #1c2331;
+    transition: 0.5s ease;
+}
+.navbar .nav-item .nav-color{
+    color:white;
+}
+#wallpaper{
+    background-image: url(../Pages/Images/image2.jpg);
+    background-size: cover;
+
+}

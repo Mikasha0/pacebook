@@ -2,10 +2,9 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import axios from 'axios';
+import axios from "axios";
 
 export default function Register() {
-
   const navigate = useNavigate();
 
   const initialValues = {
@@ -27,8 +26,8 @@ export default function Register() {
     axios.post("http://localhost:4000/users", data).then((response) => {
       alert(response.data);
     });
-    navigate('/login')
-    resetForm({data:''});
+    navigate("/login");
+    resetForm({ data: "" });
   };
 
   return (
@@ -38,7 +37,7 @@ export default function Register() {
       onSubmit={onSubmit}
     >
       <Form>
-        <div className="container w-50 " style={{marginTop: '100px'}}>
+        <div className="container w-50 mb-5" style={{ marginTop: "100px" }}>
           <div className="first-field">
             <label className="form-label" style={{ color: "green" }}>
               Username

@@ -24,7 +24,7 @@ export default function Login() {
     console.log(data);
     axios.post("http://localhost:4000/users/login", data).then((response) => {
       if (response.data.error) {
-        console.log(response.data.error);
+        alert(response.data.error);
       } else {
         localStorage.setItem("accessToken", response.data.token);
         setAuthState({

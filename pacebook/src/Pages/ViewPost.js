@@ -109,7 +109,7 @@ export default function ViewPost() {
 
   return (
     <>
-      <div className="container text-center" style={{ marginTop: "80px" }}>
+      <div className="container text-center" style={{ marginTop: "120px"}}>
         <div className="card text-center">
           <div className="card-header">Username: {postObject.username}</div>
           <div className="card-body">

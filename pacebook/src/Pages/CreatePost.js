@@ -37,62 +37,60 @@ export default function CreatePost() {
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ values, setFieldValue }) => (
-        <Form>
-          <div
-            className="container w-50"
-            style={{ marginTop: "100px", marginBottom: "100px" }}
-          >
-            <div className="first-container">
-              <label className="form-label" style={{ color: "green" }}>
-                Title
-              </label>
-              <Field
-                className="form-control"
-                placeholder="Enter you title here"
-                type="text"
-                name="title"
-              />
-            </div>
-            <div className="userError my-2" style={{ color: "red" }}>
-              <ErrorMessage name="title" />
-            </div>
-            <div className="second-container my-2">
-              <label className="form-label" style={{ color: "green" }}>
-                Post Text
-              </label>
-              <Field
-                as="textarea"
-                className="form-control"
-                placeholder="Write your post."
-                type="text"
-                name="postText"
-              />
-            </div>
-            <div className="userError my-2" style={{ color: "red" }}>
-              <ErrorMessage name="postText" />
-            </div>
-            <div className="third-container">
-              <label className="form-label" style={{ color: "green" }}>
-                Username
-              </label>
-              <Field
-                className="form-control"
-                placeholder="Enter your username."
-                name="username"
-                readOnly
-              />
-            </div>
-            <div className="userError my-2" style={{ color: "red" }}>
-              <ErrorMessage name="username" />
-            </div>
-
-            <button type="submit" className="btn btn-warning my-3">
-              Create Post
-            </button>
+      <Form>
+        <div
+          className="container w-50"
+          style={{ marginTop: "120px", marginBottom: "100px" }}
+        >
+          <div className="first-container">
+            <label className="form-label" style={{ color: "green" }}>
+              Title
+            </label>
+            <Field
+              className="form-control"
+              placeholder="Enter you title here"
+              type="text"
+              name="title"
+            />
           </div>
-        </Form>
-      )}
+          <div className="userError my-2" style={{ color: "red" }}>
+            <ErrorMessage name="title" />
+          </div>
+          <div className="second-container my-2">
+            <label className="form-label" style={{ color: "green" }}>
+              Post Text
+            </label>
+            <Field
+              as="textarea"
+              className="form-control"
+              placeholder="Write your post."
+              type="text"
+              name="postText"
+            />
+          </div>
+          <div className="userError my-2" style={{ color: "red" }}>
+            <ErrorMessage name="postText" />
+          </div>
+          <div className="third-container">
+            <label className="form-label" style={{ color: "green" }}>
+              Username
+            </label>
+            <Field
+              className="form-control"
+              placeholder="Enter your username."
+              name="username"
+              readOnly
+            />
+          </div>
+          <div className="userError my-2" style={{ color: "red" }}>
+            <ErrorMessage name="username" />
+          </div>
+
+          <button type="submit" className="btn btn-warning my-3">
+            Create Post
+          </button>
+        </div>
+      </Form>
     </Formik>
   );
 }

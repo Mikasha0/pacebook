@@ -52,7 +52,10 @@ export default function SeePost() {
   };
 
   return (
-    <div className="container" style={{ marginTop: "80px" }}>
+    <div
+      className="container"
+      style={{ marginTop: "120px", marginBottom: "100px" }}
+    >
       {showPost.map((post) => (
         <section
           className="mx-auto my-3"
